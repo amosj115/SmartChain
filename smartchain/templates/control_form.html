@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Create Internal Control{% endblock %}
+{% block content %}
+<h2>Create Internal Control</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Control Objective<input type="text" name="control_objective" required></label>
+        <label>Process Name<input type="text" name="process_name"></label>
+        <label>Risk Rating<select name="risk_rating"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Status<select name="status"><option>Active</option><option>Monitoring</option><option>Inactive</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Control</button>
+</form>
+{% endblock %}

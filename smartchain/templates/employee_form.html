@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Create Employee{% endblock %}
+{% block content %}
+<h2>Create Employee</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Employee Number<input type="text" name="employee_number" required></label>
+        <label>First Name<input type="text" name="first_name" required></label>
+        <label>Last Name<input type="text" name="last_name" required></label>
+        <label>Title<input type="text" name="title"></label>
+        <label>Position<input type="text" name="position"></label>
+        <label>Email<input type="email" name="email"></label>
+        <label>Phone<input type="text" name="phone"></label>
+        <label>Department
+            <select name="department_id">
+                {% for dept in departments %}<option value="{{ dept.id }}">{{ dept.name }}</option>{% endfor %}
+            </select>
+        </label>
+        <label>Directorate
+            <select name="directorate_id" required>
+                <option value="">Select directorate</option>
+                {% for directorate in directorates %}<option value="{{ directorate.id }}">{{ directorate.name }}</option>{% endfor %}
+            </select>
+        </label>
+        <label>Unit
+            <select name="unit_id" required>
+                <option value="">Select unit</option>
+                {% for unit in units %}<option value="{{ unit.id }}">{{ unit.name }}</option>{% endfor %}
+            </select>
+        </label>
+        <label>Role
+            <select name="role_id">
+                {% for role in roles %}<option value="{{ role.id }}">{{ role.name }}</option>{% endfor %}
+            </select>
+        </label>
+        <label>Account Status<input type="text" name="account_status" value="active"></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Employee</button>
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create APP Item{% endblock %}
+{% block content %}
+<h2>Create Annual Procurement Plan Item</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Item Name<input type="text" name="item_name" required></label>
+        <label>Estimated Value<input type="number" step="0.01" name="estimated_value"></label>
+        <label>Procurement Method<input type="text" name="procurement_method" value="Open Tender"></label>
+        <label>Responsible Unit<input type="text" name="responsible_unit"></label>
+        <label>Planned Date<input type="date" name="planned_date"></label>
+        <label>Budget Allocation<input type="number" step="0.01" name="budget_allocation"></label>
+        <label>Status<select name="status"><option>Planned</option><option>Approved</option><option>In Progress</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save APP Item</button>
+</form>
+{% endblock %}

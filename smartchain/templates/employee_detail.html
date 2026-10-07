@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Employee 360{% endblock %}
+{% block content %}
+<h2>Employee 360</h2>
+<div class="panel">
+    <h3>{{ employee.first_name }} {{ employee.last_name }}</h3>
+    <p><strong>Employee Number:</strong> {{ employee.employee_number }}</p>
+    <p><strong>Title:</strong> {{ employee.title or 'Not provided' }}</p>
+    <p><strong>Position:</strong> {{ employee.position or 'Not provided' }}</p>
+    <p><strong>Department:</strong> {{ department.name if department else 'Not assigned' }}</p>
+    <p><strong>Directorate:</strong> {{ directorate.name if directorate else 'Not assigned' }}</p>
+    <p><strong>Unit:</strong> {{ unit.name if unit else 'Not assigned' }}</p>
+    <p><strong>Role:</strong> {{ role.name if role else 'Not assigned' }}</p>
+    <p><strong>Email:</strong> {{ employee.email or 'Not provided' }}</p>
+    <p><strong>Phone:</strong> {{ employee.phone or 'Not provided' }}</p>
+    <p><strong>Account Status:</strong> {{ employee.account_status }}</p>
+</div>
+{% endblock %}

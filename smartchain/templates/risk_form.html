@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Risk Register Item{% endblock %}
+{% block content %}
+<h2>Create Risk Register Item</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Category<input type="text" name="category"></label>
+        <label>Likelihood<select name="likelihood"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Impact<select name="impact"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Risk Rating<select name="risk_rating"><option>Low</option><option selected>Moderate</option><option>High</option></select></label>
+        <label>Status<select name="status"><option>Open</option><option>Monitoring</option><option>Mitigated</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Risk Item</button>
+</form>
+{% endblock %}

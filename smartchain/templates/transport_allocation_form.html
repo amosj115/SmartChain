@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Allocate Transport{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">Transport officer workspace</span><h1>Allocate vehicle</h1><p>Request {{ item.id }} · {{ item.employee_name }} · {{ item.pickup_location }} to {{ item.destination }}</p></div></div>
+<form method="post" class="form-card"><div class="form-grid"><label>Available Vehicle<select name="vehicle_id" required><option value="">Select vehicle</option>{% for vehicle in vehicles %}<option value="{{ vehicle.id }}">{{ vehicle.fleet_number }} · {{ vehicle.registration_number }} · {{ vehicle.availability_status }}</option>{% endfor %}</select></label><label>Authorised Driver<select name="driver_id"><option value="">Select driver</option>{% for driver in drivers %}<option value="{{ driver.id }}">{{ driver.employee_name }} · {{ driver.employee_number }}</option>{% endfor %}</select></label></div><button class="primary-btn" type="submit">Allocate vehicle</button></form>
+{% endblock %}

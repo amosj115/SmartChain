@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartChain</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing-body">
+    <div class="landing-card">
+        <div class="brand-mark" aria-hidden="true">SC</div>
+        <span class="eyebrow">Intwinity AI Labs presents</span>
+        <h1>{{ app_name }}</h1>
+        <p class="landing-kicker">Digital Supply Chain Intelligence</p>
+        <p class="muted">National Department of Social Development</p>
+        <p class="landing-copy">Digitalising Supply Chain Management, Procurement, Transport, Assets, Governance and Compliance.</p>
+        <div class="landing-actions">
+            <a class="primary-btn" href="{{ url_for('auth.login') }}">Sign In</a>
+            <a class="secondary-btn" href="{{ url_for('auth.register') }}">Register</a>
+            <a class="secondary-btn" href="{{ url_for('transport_portal.request_transport') }}">Directorate Transport Portal</a>
+            <a class="secondary-btn" href="{{ url_for('procurement_portal.submit_procurement_request') }}">Directorate RQ / Procurement Portal</a>
+            {% if config.ENV == 'development' %}<a class="text-link" href="{{ url_for('auth.dev_access') }}">Development environment</a>{% endif %}
+        </div>
+        <p class="muted">Secure, auditable, role-based digital workplace for the National Office.</p>
+    </div>
+</body>
+</html>

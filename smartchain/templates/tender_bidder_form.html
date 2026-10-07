@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Register Bidder{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">{{ tender.tender_number }} · Bidder register</span><h1>Register bidder</h1><p>Capture the bidder record and submission context.</p></div></div>
+<form method="post" class="form-card"><div class="form-grid"><label>Legal name<input type="text" name="legal_name" required></label><label>Trading name<input name="trading_name"></label><label>Registration number<input name="registration_number"></label><label>Supplier / bid reference<input name="supplier_reference"></label><label>Contact name<input name="contact_name"></label><label>Contact email<input type="email" name="contact_email"></label><label>Phone<input name="phone"></label><label>Bid price<input type="number" step="0.01" min="0" name="bid_price" required></label><label>Submission date and time<input type="datetime-local" name="submitted_at"></label><label>Compliance status<select name="compliance_status"><option>Pending</option><option>Pass</option><option>Fail</option><option>Under Review</option></select></label><label>Registration notes<textarea name="registration_details"></textarea></label><label>Comments<textarea name="comments"></textarea></label></div><button class="primary-btn" type="submit">Save bidder</button></form>
+{% endblock %}

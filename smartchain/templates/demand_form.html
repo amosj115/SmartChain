@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create Demand{% endblock %}
+{% block content %}
+<h2>Create Demand Request</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Responsible Unit<input type="text" name="responsible_unit"></label>
+        <label>Estimated Cost<input type="number" step="0.01" name="estimated_cost"></label>
+        <label>Priority<select name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Timing<input type="text" name="timing"></label>
+        <label>Justification<textarea name="justification"></textarea></label>
+        <label>Description<textarea name="description" required></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Demand</button>
+</form>
+{% endblock %}

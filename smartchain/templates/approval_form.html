@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Approval{% endblock %}
+{% block content %}
+<h2>Create Approval Record</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Entity Type<select name="entity_type"><option>Demand</option><option>Requisition</option><option>Contract</option><option>General</option></select></label>
+        <label>Entity ID<input type="number" name="entity_id" value="1"></label>
+        <label>Approver<input type="text" name="approver" required></label>
+        <label>Status<select name="status"><option>Pending</option><option selected>Approved</option><option>Rejected</option></select></label>
+        <label>Comments<textarea name="comments"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Approval</button>
+</form>
+{% endblock %}

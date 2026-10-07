@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create Contract{% endblock %}
+{% block content %}
+<h2>Create Contract</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Contract Number<input type="text" name="contract_number" required></label>
+        <label>Supplier<input type="text" name="supplier" required></label>
+        <label>Tender<input type="text" name="tender"></label>
+        <label>Start Date<input type="date" name="start_date"></label>
+        <label>End Date<input type="date" name="end_date"></label>
+        <label>Value<input type="number" step="0.01" name="value"></label>
+        <label>Status<select name="status"><option>Active</option><option>Pending</option><option>Expired</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Contract</button>
+</form>
+{% endblock %}

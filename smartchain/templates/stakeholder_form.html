@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Stakeholder{% endblock %}
+{% block content %}
+<h2>Create Stakeholder</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Name<input type="text" name="name" required></label>
+        <label>Organisation<input type="text" name="organisation"></label>
+        <label>Role<input type="text" name="role"></label>
+        <label>Influence<select name="influence"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Engagement Status<select name="engagement_status"><option selected>Active</option><option>Inactive</option><option>Monitoring</option></select></label>
+        <label>Notes<textarea name="notes"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Stakeholder</button>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SmartChain{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='responsive-overrides.css') }}">
+    <script src="{{ url_for('static', filename='smartchain.js') }}" defer></script>
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand-box"><div class="brand-mark" aria-hidden="true">SC</div><div class="brand-copy"><h1>SmartChain</h1><small>DSD National Office</small></div><button class="sidebar-toggle" type="button" aria-label="Collapse navigation" onclick="document.body.classList.toggle('sidebar-collapsed')">&lsaquo;</button></div>
+            <nav class="sidebar-nav">
+                <div class="nav-group"><span class="nav-label">Overview</span><a class="nav-link" aria-label="Dashboard - Command Centre" href="{{ url_for('dashboard.index') }}"><span class="nav-icon">⌂</span><span>Command Centre</span></a><a class="nav-link" href="{{ url_for('org.employees') }}"><span class="nav-icon">◎</span><span>Employee 360</span></a></div>
+                <div class="nav-group"><span class="nav-label">Operations</span><a class="nav-link" href="{{ url_for('tender.index') }}"><span class="nav-icon">◇</span><span>Tender</span></a><a class="nav-link" href="{{ url_for('transport.index') }}"><span class="nav-icon">▰</span><span>Transport</span></a>{% if current_user.is_authenticated and current_user.role_obj and current_user.role_obj.name in ['System Administrator', 'SCM Manager', 'SCM Officer / Practitioner', 'SCM Intake Officer', 'SCM Clerk', 'SCM Supervisor'] %}<a class="nav-link" href="{{ url_for('procurement_intake.queue') }}"><span class="nav-icon">□</span><span>RQ Command Centre</span></a>{% elif current_user.is_authenticated and current_user.role_obj and current_user.role_obj.name in ['Directorate DD', 'Directorate Director', 'Directorate Chief Director'] %}<a class="nav-link" href="{{ url_for('procurement_portal.submit_procurement_request') }}"><span class="nav-icon">□</span><span>RQ Portal</span></a>{% else %}<a class="nav-link" href="{{ url_for('procurement_intake.queue') }}"><span class="nav-icon">□</span><span>RQ</span></a>{% endif %}<a class="nav-link" href="{{ url_for('demand.index') }}"><span class="nav-icon">◈</span><span>Demand Management</span></a><a class="nav-link" href="{{ url_for('app.index') }}"><span class="nav-icon">▤</span><span>Annual Procurement Plan</span></a><a class="nav-link" href="{{ url_for('supplier.index') }}"><span class="nav-icon">♧</span><span>Suppliers</span></a><a class="nav-link" href="{{ url_for('contract.index') }}"><span class="nav-icon">▱</span><span>Contracts</span></a></div>
+                <div class="nav-group"><span class="nav-label">Mobility & Assets</span><a class="nav-link" href="{{ url_for('travel.index') }}"><span class="nav-icon">↗</span><span>Travel / VA26</span></a><a class="nav-link" href="{{ url_for('asset.index') }}"><span class="nav-icon">▣</span><span>Asset Register</span></a></div>
+                <div class="nav-group"><span class="nav-label">Governance</span><a class="nav-link" href="{{ url_for('control.index') }}"><span class="nav-icon">✓</span><span>Internal Controls</span></a><a class="nav-link" href="{{ url_for('risk.index') }}"><span class="nav-icon">△</span><span>Risk</span></a><a class="nav-link" href="{{ url_for('strategic_plans.index') }}"><span class="nav-icon">◌</span><span>Strategic Plans</span></a><a class="nav-link" href="{{ url_for('audit.index') }}"><span class="nav-icon">▥</span><span>Audit</span></a><a class="nav-link" href="{{ url_for('reports.index') }}"><span class="nav-icon">▥</span><span>Reports</span></a></div>
+                <div class="nav-group"><span class="nav-label">Security & Administration</span><a class="nav-link" href="{{ url_for('security.index') }}"><span class="nav-icon">◇</span><span>SmartShield</span></a>{% if current_user.is_authenticated and current_user.role_obj and current_user.role_obj.name in ['System Administrator', 'SCM Manager', 'Internal Audit'] %}<a class="nav-link" href="{{ url_for('integrations.hub') }}"><span class="nav-icon">⇄</span><span>Integration Hub</span></a>{% endif %}<a class="nav-link" href="{{ url_for('admin.index') }}"><span class="nav-icon">⚙</span><span>Administration</span></a></div>
+            </nav>
+            <div class="sidebar-footer"><span class="status-dot"></span><span>Systems operational</span></div>
+        </aside>
+        <main class="main-panel">
+            <header class="topbar"><button class="mobile-menu-button" type="button" aria-label="Open navigation" aria-expanded="false" onclick="toggleMobileNav()">☰</button><div class="page-context"><span class="eyebrow">National Office / Supply Chain Management</span><strong>{% block page_title %}{{ self.title() }}{% endblock %}</strong></div><div class="topbar-actions"><form action="{{ url_for('search.index') }}" method="get" class="search-form"><span aria-hidden="true">⌕</span><input type="text" name="q" placeholder="Search SmartChain..." aria-label="Search SmartChain"></form><button class="icon-button" type="button" aria-label="Toggle dark mode" onclick="document.body.classList.toggle('dark-mode'); localStorage.setItem('smartchain-theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light')">◐</button>{% if current_user.is_authenticated %}<a class="notification-link" href="{{ url_for('notifications.index') }}" aria-label="Notifications">◌<span class="notification-dot"></span></a><div class="user-menu"><span class="avatar">{{ current_user.full_name[0] if current_user.full_name else 'U' }}</span><span><strong>{{ current_user.full_name }}</strong><small>{{ current_user.role_obj.name }}</small></span><a href="{{ url_for('auth.logout') }}">Sign out</a></div>{% endif %}</div></header>
+            {% with messages = get_flashed_messages() %}{% if messages %}<div class="flash">{% for msg in messages %}<p>{{ msg }}</p>{% endfor %}</div>{% endif %}{% endwith %}
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <script>if (localStorage.getItem('smartchain-theme') === 'dark') document.body.classList.add('dark-mode'); document.querySelectorAll('.nav-link').forEach(function (link) { if (link.pathname === window.location.pathname) link.classList.add('active'); }); function toggleMobileNav() { document.body.classList.toggle('mobile-nav-open'); document.querySelector('.mobile-menu-button').setAttribute('aria-expanded', document.body.classList.contains('mobile-nav-open')); }</script>
+</body>
+</html>

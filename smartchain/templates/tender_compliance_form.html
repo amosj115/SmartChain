@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Add Compliance Requirement{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">{{ tender.tender_number }} · Compliance</span><h1>Add requirement</h1><p>Configure an administrative or technical compliance check for this tender.</p></div></div>
+<form method="post" class="form-card"><div class="form-grid"><label>Requirement<input type="text" name="requirement" required></label><label>Submitted<select name="submitted"><option value="false">No</option><option value="true">Yes</option></select></label><label>Validity<select name="valid"><option value="pending">Pending review</option><option value="true">Valid</option><option value="false">Invalid</option></select></label><label>Evidence Reference<input type="text" name="evidence_reference"></label><label>Notes<textarea name="notes"></textarea></label></div><button class="primary-btn" type="submit">Save requirement</button></form>
+{% endblock %}

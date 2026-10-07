@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create Asset{% endblock %}
+{% block content %}
+<h2>Create Asset</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Asset Number<input type="text" name="asset_number" required></label>
+        <label>Description<input type="text" name="description" required></label>
+        <label>Category<input type="text" name="category"></label>
+        <label>Location<input type="text" name="location"></label>
+        <label>Value<input type="number" step="0.01" name="value"></label>
+        <label>Condition<select name="condition"><option>Good</option><option>Fair</option><option>Poor</option></select></label>
+        <label>Status<select name="status"><option>Active</option><option>Inactive</option><option>Disposed</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Asset</button>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Create Requisition{% endblock %}
+{% block content %}
+<h2>Create Requisition</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>RQ Number<input type="text" name="requisition_number"></label>
+        <label>Requester<input type="text" name="requester" required></label>
+        <label>Department<input type="text" name="department"></label>
+        <label>Directorate<input type="text" name="directorate"></label>
+        <label>Unit<input type="text" name="unit"></label>
+        <label>Estimated Value<input type="number" step="0.01" name="estimated_value"></label>
+        <label>Budget<input type="text" name="budget"></label>
+        <label>Priority<select name="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></label>
+        <label>Status<select name="status"><option>Submitted</option><option>Approved</option><option>Rejected</option></select></label>
+        <label>Description<textarea name="description" required></textarea></label>
+        <label>Motivation<textarea name="motivation"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Requisition</button>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Edit Tender' if tender else 'Create Tender' }}{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">Tender management</span><h1>{{ 'Edit tender details' if tender else 'Create tender' }}</h1><p>Record procurement ownership, dates and the approved evaluation approach.</p></div></div>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Tender number<input type="text" name="tender_number" value="{{ tender.tender_number if tender else '' }}" {% if tender %}readonly{% else %}required{% endif %}></label>
+        <label>Tender title<input type="text" name="title" value="{{ tender.title if tender else '' }}" required></label>
+        <label>Description<textarea name="description">{{ tender.description if tender else '' }}</textarea></label>
+        <label>Directorate<input name="directorate" value="{{ profile.directorate if profile else '' }}"></label>
+        <label>Responsible SCM official<input name="responsible_official" value="{{ profile.responsible_official if profile else '' }}"></label>
+        <label>Procurement category<input name="procurement_category" value="{{ profile.procurement_category if profile else '' }}" placeholder="ICT, Facilities, Professional services"></label>
+        <label>Procurement type<select name="procurement_type"><option value="">Select type</option>{% for item in ['Goods', 'Services', 'Works'] %}<option value="{{ item }}" {% if profile and profile.procurement_type == item %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+        <label>Estimated value<input type="number" step="0.01" min="0" name="estimated_value" value="{{ tender.estimated_value if tender else '' }}"></label>
+        <label>Opening date<input type="date" name="opening_date" value="{{ profile.opening_date if profile else '' }}"></label>
+        <label>Closing date<input type="date" name="closing_date" value="{{ tender.closing_date if tender else '' }}"></label>
+        <label>Evaluation methodology<input name="evaluation_methodology" value="{{ profile.evaluation_methodology if profile else '' }}" placeholder="Functionality and price / approved method"></label>
+        <label>Mandatory requirements<textarea name="mandatory_requirements">{{ profile.mandatory_requirements if profile else '' }}</textarea></label>
+        <label>Functionality required<select name="functionality_required"><option value="false">No</option><option value="true" {% if profile and profile.functionality_required %}selected{% endif %}>Yes</option></select></label>
+        <label>Minimum functionality threshold<input type="number" min="0" step="0.01" name="minimum_functionality_threshold" value="{{ profile.minimum_functionality_threshold if profile and profile.minimum_functionality_threshold is not none else '' }}"></label>
+        <label>Price/preference methodology<input name="price_preference_method" value="{{ profile.price_preference_method if profile else '' }}"></label>
+        <label>Status<select name="status">{% for item in ['Planning', 'Open', 'Advertised', 'Under Evaluation', 'Closed', 'Awarded'] %}<option {% if tender and tender.status == item %}selected{% elif not tender and item == 'Open' %}selected{% endif %}>{{ item }}</option>{% endfor %}</select></label>
+    </div>
+    <button type="submit" class="primary-btn">{{ 'Save tender details' if tender else 'Create tender' }}</button>
+</form>
+{% endblock %}

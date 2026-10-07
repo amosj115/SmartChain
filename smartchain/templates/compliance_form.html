@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Compliance Check{% endblock %}
+{% block content %}
+<h2>Create Compliance Check</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Category<input type="text" name="category" value="Procurement"></label>
+        <label>Owner<input type="text" name="owner"></label>
+        <label>Status<select name="status"><option>Monitoring</option><option selected>Compliant</option><option>Non-Compliant</option></select></label>
+        <label>Notes<textarea name="notes"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Compliance Check</button>
+</form>
+{% endblock %}

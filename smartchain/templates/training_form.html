@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Training Record{% endblock %}
+{% block content %}
+<h2>Create Training Record</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Category<input type="text" name="category" value="Compliance"></label>
+        <label>Provider<input type="text" name="provider"></label>
+        <label>Target Group<input type="text" name="target_group"></label>
+        <label>Completion Date<input type="date" name="completion_date"></label>
+        <label>Status<select name="status"><option>Scheduled</option><option selected>Completed</option><option>In Progress</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Training Record</button>
+</form>
+{% endblock %}

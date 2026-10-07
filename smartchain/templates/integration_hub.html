@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Integration Hub{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">Systems / Integration Hub</span><h1>Integration Hub</h1><p>External connectors execute in sandbox only. No live endpoints or credentials are configured.</p></div><span class="status-badge">SANDBOX ONLY</span></div>
+
+<section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Registered connections</span><h2>Systems and authority</h2></div></div>
+    <div class="table-wrap"><table class="data-table"><thead><tr><th>System</th><th>Mode</th><th>State</th><th>Adapter</th><th>Source of truth</th></tr></thead><tbody>
+    {% for connection in connections %}<tr><td>{{ connection.name }}</td><td>{{ connection.mode }}</td><td>{{ connection.status }}</td><td>{{ connection.adapter_version }}</td><td>{{ connection.source_of_truth }}</td></tr>{% endfor %}
+    </tbody></table></div>
+</section>
+
+{% if current_user.role_obj.name == 'System Administrator' %}
+<section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Administrative test console</span><h2>Run a sandbox operation</h2></div></div>
+    {% if result %}<div class="flash">{% if result.error %}<p>{{ result.error }}</p>{% else %}<p>{{ 'Existing idempotent result returned' if result.reused else 'Sandbox transaction recorded' }}: {{ result.transaction.transaction_id }}</p><pre>{{ result.transaction|tojson(indent=2) }}</pre>{% endif %}</div>{% endif %}
+    <form method="post" action="{{ url_for('integrations.hub') }}" class="form-grid">
+        <label>Connector<select name="connector" id="integration-connector" required>{% for key, connector in connectors.items() if connector.operations %}<option value="{{ key }}">{{ connector.name }} (SANDBOX)</option>{% endfor %}</select></label>
+        <label>Operation<select name="operation" id="integration-operation" required>{% for key, connector in connectors.items() %}{% for operation in connector.operations|sort %}<option value="{{ operation }}" data-connector="{{ key }}">{{ connector.name }}: {{ operation|replace('_', ' ')|title }}</option>{% endfor %}{% endfor %}</select></label>
+        <label>Idempotency key<input name="idempotency_key" maxlength="200" required value="{{ request.form.get('idempotency_key', '') }}"></label>
+        <label class="full-width">JSON payload<textarea name="payload" rows="7" required>{{ request.form.get('payload', '{"case_id":"SC-2026-000001","request_id":"RQ-2026-000001","destination":"Cape Town","travel_date":"2026-11-15"}') }}</textarea></label>
+        <div><button class="primary-btn" type="submit">Run sandbox test</button></div>
+    </form>
+    <p class="muted">Responses are synthetic, marked non-authoritative, and never represent a live booking, supplier verification, publication, or budget decision.</p>
+</section>
+{% endif %}
+
+<section class="panel">
+    <div class="panel-heading"><div><span class="eyebrow">Persisted integration history</span><h2>Recent transactions</h2></div><span class="count-badge">{{ transactions|length }}</span></div>
+    {% if transactions %}<div class="table-wrap"><table class="data-table"><thead><tr><th>Transaction</th><th>Correlation / case</th><th>Target</th><th>Operation</th><th>Status</th><th>Recorded</th></tr></thead><tbody>
+    {% for item in transactions %}<tr><td>{{ item.transaction_id }}</td><td>{{ item.case_id or item.correlation_id }}</td><td>{{ item.target_system }}</td><td>{{ item.operation }}</td><td>{{ item.status }}</td><td>{{ item.created_at.strftime('%Y-%m-%d %H:%M UTC') if item.created_at else '' }}</td></tr>{% endfor %}
+    </tbody></table></div>{% else %}<div class="empty-state"><h3>No integration transactions</h3><p>Sandbox calls will appear here after they are recorded.</p></div>{% endif %}
+</section>
+<script>
+    (function () {
+        const connector = document.getElementById('integration-connector');
+        const operation = document.getElementById('integration-operation');
+        function filterOperations() {
+            let selected = false;
+            Array.from(operation.options).forEach(function (option) {
+                option.hidden = option.dataset.connector !== connector.value;
+                if (!option.hidden && !selected) {
+                    option.selected = true;
+                    selected = true;
+                }
+            });
+        }
+        connector.addEventListener('change', filterOperations);
+        filterOperations();
+    }());
+</script>
+{% endblock %}

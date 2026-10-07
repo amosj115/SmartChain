@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Create Archive Record{% endblock %}
+{% block content %}
+<h2>Create Archive Record</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Archive Type<input type="text" name="archive_type" value="General"></label>
+        <label>Storage Path<input type="text" name="storage_path"></label>
+        <label>Status<select name="status"><option>Archived</option><option>Pending</option><option>Retrieval</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Archive</button>
+</form>
+{% endblock %}

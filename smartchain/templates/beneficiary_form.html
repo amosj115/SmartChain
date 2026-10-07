@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Beneficiary{% endblock %}
+{% block content %}
+<h2>Create Beneficiary</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Beneficiary Name<input type="text" name="beneficiary_name" required></label>
+        <label>Program<input type="text" name="program" required></label>
+        <label>Location<input type="text" name="location"></label>
+        <label>Priority<select name="priority"><option>Low</option><option selected>High</option><option>Medium</option></select></label>
+        <label>Status<select name="status"><option selected>Active</option><option>Inactive</option><option>Review</option></select></label>
+        <label>Notes<textarea name="notes"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Beneficiary</button>
+</form>
+{% endblock %}

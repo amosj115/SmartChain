@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Import Tender Bidders{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">{{ tender.tender_number }} · Bidder register</span><h1>Import bidders</h1><p>Upload CSV, XLSX, PDF or DOCX. Extracted records must be reviewed before import.</p></div><a class="secondary-btn" href="{{ url_for('tender.workspace', tender_id=tender.id) }}">Back to tender</a></div>
+<form method="post" enctype="multipart/form-data" class="form-card"><div class="form-grid"><label>Bidder list<input type="file" name="bidder_file" accept=".csv,.xlsx,.pdf,.docx" required></label></div><button class="primary-btn" type="submit">Review bidder records</button></form>
+<p class="muted">For best results use a CSV/XLSX header row with legal_name, supplier_reference and bid_price. PDF/DOCX text extraction is heuristic, requires manual review, and does not process scanned images.</p>
+{% endblock %}

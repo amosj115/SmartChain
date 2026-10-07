@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Record Security Event{% endblock %}
+{% block content %}
+<h2>Record Security Event</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Severity<select name="severity"><option>Low</option><option>Medium</option><option selected>High</option></select></label>
+        <label>Module<input type="text" name="module" value="Auth"></label>
+        <label>Status<select name="status"><option>Open</option><option>Monitoring</option><option>Resolved</option></select></label>
+        <label>Description<textarea name="description" required></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Security Event</button>
+</form>
+{% endblock %}

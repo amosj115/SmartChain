@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Policy{% endblock %}
+{% block content %}
+<h2>Create Policy</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Category<input type="text" name="category" value="General"></label>
+        <label>Version<input type="text" name="version" value="1.0"></label>
+        <label>Owner<input type="text" name="owner"></label>
+        <label>Status<select name="status"><option>Draft</option><option selected>Active</option><option>Review</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Policy</button>
+</form>
+{% endblock %}

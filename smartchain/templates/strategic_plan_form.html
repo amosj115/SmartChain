@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Create Strategic Plan{% endblock %}
+{% block content %}
+<h2>Create Strategic Plan</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Objective<input type="text" name="objective" required></label>
+        <label>Target Outcome<input type="text" name="outcome" required></label>
+        <label>Owner<input type="text" name="owner"></label>
+        <label>Target Date<input type="date" name="target_date"></label>
+        <label>Progress %<input type="number" name="progress_percent" value="0" min="0" max="100"></label>
+        <label>Status<select name="status"><option selected>Planned</option><option>In Progress</option><option>At Risk</option><option>Complete</option></select></label>
+        <label>Notes<textarea name="notes"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Strategic Plan</button>
+</form>
+{% endblock %}

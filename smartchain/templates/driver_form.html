@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Create Driver{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">SmartFleet operations</span><h1>Create driver record</h1><p>Only authorised drivers may be allocated to transport requests.</p></div></div>
+<form method="post" class="form-card"><div class="form-grid"><label>Employee Name<input name="employee_name" required></label><label>Employee Number<input name="employee_number" required></label><label>Contact<input name="contact"></label><label>Licence Number<input name="licence_number"></label><label>Licence Expiry<input type="date" name="licence_expiry"></label><label>Status<select name="status"><option>AUTHORISED</option><option>EXPIRED</option><option>SUSPENDED</option></select></label></div><button class="primary-btn" type="submit">Save driver</button></form>
+{% endblock %}

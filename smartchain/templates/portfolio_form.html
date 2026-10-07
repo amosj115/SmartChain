@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Portfolio Project{% endblock %}
+{% block content %}
+<h2>Create Portfolio Project</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Project Name<input type="text" name="project_name" required></label>
+        <label>Phase<input type="text" name="phase" value="Implementation"></label>
+        <label>Owner<input type="text" name="owner"></label>
+        <label>Due Date<input type="date" name="due_date"></label>
+        <label>Completion %<input type="number" name="completion_percent" value="0" min="0" max="100"></label>
+        <label>Status<select name="status"><option>Planned</option><option selected>In Progress</option><option>Delayed</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Project</button>
+</form>
+{% endblock %}

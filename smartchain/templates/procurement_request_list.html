@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Directorate RQ Tracker{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">Directorate RQ & Procurement Portal</span><h1>Directorate procurement tracker</h1><p>Track cases belonging to your authorised directorate scope.</p></div><a class="primary-btn" href="{{ url_for('procurement_portal.submit_procurement_request') }}">＋ New RQ</a></div>
+{% if items %}<div class="table-wrap"><table class="data-table"><thead><tr><th>RQ Number</th><th>Description</th><th>Directorate</th><th>Value</th><th>Status</th></tr></thead><tbody>{% for item in items %}<tr><td><a class="text-link" href="{{ url_for('procurement_portal.request_detail', request_id=item.id) }}">{{ item.request_number }}</a></td><td>{{ item.description }}</td><td>{{ item.directorate }}</td><td>R {{ '%.2f'|format(item.estimated_value or 0) }}</td><td><span class="status-badge status-open">{{ item.status }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><h3>No procurement requests yet</h3><p>Submit a structured RQ to start a digital case.</p><a class="primary-btn" href="{{ url_for('procurement_portal.submit_procurement_request') }}">Submit an RQ</a></div>{% endif %}
+{% endblock %}

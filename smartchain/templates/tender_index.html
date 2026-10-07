@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Tender Command Centre{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <span class="eyebrow">Supply Chain Management / Tender lifecycle</span>
+        <h1>Tender Command Centre</h1>
+        <p>Open an individual tender to manage its complete workspace: methodology, screening, evaluation, comparative analysis, BEC, BAC, outcome and contract handoff.</p>
+    </div>
+    {% if current_user.role_obj and current_user.role_obj.name in ['System Administrator', 'SCM Manager', 'SCM Officer / Practitioner', 'SCM Supervisor'] %}
+    <a class="primary-btn" href="{{ url_for('tender.create_tender') }}">＋ Create tender</a>
+    {% endif %}
+</div>
+{% if items %}
+<div class="tender-command-list">
+    {% for tender in items %}
+    <section class="panel tender-launch-card">
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">{{ tender.tender_number }} · Current stage: {{ tender_stages[tender.id] }}</span>
+                <h2>{{ tender.title }}</h2>
+                <p>{{ tender.description or 'No tender description recorded.' }}</p>
+            </div>
+            <span class="status-badge status-{{ tender.status|lower|replace(' ', '-') }}">{{ tender.status }}</span>
+        </div>
+        <div class="tender-summary">
+            <div><span class="eyebrow">Bidders</span><strong>{{ tender.bidders|length }}</strong></div>
+            <div><span class="eyebrow">Criteria</span><strong>{{ tender.criteria|length }}</strong></div>
+            <div><span class="eyebrow">Screening</span><strong>{{ tender.screening_requirements|length }}</strong></div>
+            <div><span class="eyebrow">Evaluators</span><strong>{{ tender.evaluator_assignments|selectattr('active')|list|length }}</strong></div>
+            <div><span class="eyebrow">BEC / BAC</span><strong>{{ tender.committee_meetings|selectattr('committee_type', 'equalto', 'BEC')|list|length }} / {{ tender.committee_meetings|selectattr('committee_type', 'equalto', 'BAC')|list|length }}</strong></div>
+            <div><span class="eyebrow">Reports</span><strong>{{ tender.generated_reports|length }}</strong></div>
+        </div>
+        <div class="workspace-actions">
+            <a class="primary-btn" href="{{ url_for('tender.workspace', tender_id=tender.id) }}">Open Tender Workspace</a>
+            <a class="secondary-btn" href="{{ url_for('tender.tender_documents', tender_id=tender.id) }}">Tender documents</a>
+            <a class="secondary-btn" href="{{ url_for('tender.tender_committee_meetings', tender_id=tender.id, committee_type='BEC') }}">BEC</a>
+            <a class="secondary-btn" href="{{ url_for('tender.tender_committee_meetings', tender_id=tender.id, committee_type='BAC') }}">BAC</a>
+        </div>
+    </section>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><h2>No tenders available</h2><p>Create a tender to open its command workspace.</p></div>
+{% endif %}
+{% endblock %}

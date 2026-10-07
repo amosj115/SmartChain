@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Create Travel Request{% endblock %}
+{% block content %}
+<h2>Create Travel / VA26 Request</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Destination<input type="text" name="destination"></label>
+        <label>Status<select name="status"><option>Draft</option><option>Approved</option><option>Rejected</option></select></label>
+        <label>Purpose<textarea name="purpose" required></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Travel Request</button>
+</form>
+{% endblock %}

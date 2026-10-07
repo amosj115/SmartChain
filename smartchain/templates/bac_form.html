@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Create BAC Record{% endblock %}
+{% block content %}
+<h2>Create BAC Record</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Tender<select name="tender_id" required><option value="">Select tender</option>{% for tender in tenders %}<option value="{{ tender.id }}">{{ tender.tender_number }} · {{ tender.title }}</option>{% endfor %}</select></label>
+        <label>Title<input type="text" name="title" required></label>
+        <label>Decision<input type="text" name="decision"></label>
+        <label>Status<select name="status"><option>Pending</option><option>Approved</option><option>Rejected</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save BAC Record</button>
+</form>
+{% endblock %}

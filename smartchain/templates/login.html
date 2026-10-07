@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="login-wrap">
+    <form class="login-card" method="post" action="{{ url_for('auth.login') }}">
+        <span class="eyebrow">National Office / Standard account sign-in</span>
+        <h2>Sign in to SmartChain</h2>
+        <p class="muted">Use your approved email, username, or employee number. Your role controls which workspaces you can access.</p>
+        <label>Email, username or employee number</label>
+        <input type="text" name="username" required>
+        <button type="submit" class="primary-btn">Sign In</button>
+        {% if config.ENV == 'development' %}
+        <a class="secondary-btn" href="{{ url_for('auth.dev_access') }}">Development administrator shortcut</a>
+        <p>Optional local shortcut. It signs in as the demo System Administrator.</p>
+        {% endif %}
+        <a class="secondary-btn" href="{{ url_for('auth.register') }}">Create employee account</a>
+        <a class="text-link" href="{{ url_for('auth.forgot_password') }}">Password policy notice</a>
+        <a class="text-link" href="{{ url_for('index') }}">Back to SmartChain</a>
+    </form>
+</div>
+{% endblock %}

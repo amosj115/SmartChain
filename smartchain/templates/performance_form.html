@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Performance Indicator{% endblock %}
+{% block content %}
+<h2>Create Performance Indicator</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Category<input type="text" name="category" value="Delivery"></label>
+        <label>Target<input type="text" name="target" value="95%"></label>
+        <label>Actual<input type="text" name="actual" value="92%"></label>
+        <label>Status<select name="status"><option>On Track</option><option selected>At Risk</option><option>Delayed</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Indicator</button>
+</form>
+{% endblock %}

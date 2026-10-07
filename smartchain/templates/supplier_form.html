@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Create Supplier{% endblock %}
+{% block content %}
+<h2>Create Supplier</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Name<input type="text" name="name" required></label>
+        <label>Registration Number<input type="text" name="registration_number" required></label>
+        <label>Service Categories<input type="text" name="service_categories"></label>
+        <label>Status<select name="status"><option>Active</option><option>Pending</option><option>Suspended</option></select></label>
+        <label>Contact Email<input type="email" name="contact_email"></label>
+        <label>Phone<input type="text" name="phone"></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Supplier</button>
+</form>
+{% endblock %}

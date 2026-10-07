@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Document{% endblock %}
+{% block content %}
+<h2>Create Document</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Document Type<input type="text" name="document_type" value="Report"></label>
+        <label>Link Type<input type="text" name="link_type"></label>
+        <label>Link ID<input type="number" name="link_id"></label>
+        <label>Uploaded By<input type="text" name="uploaded_by"></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Document</button>
+</form>
+{% endblock %}

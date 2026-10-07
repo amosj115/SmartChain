@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Service Feedback{% endblock %}
+{% block content %}
+<h2>Create Service Feedback</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Service Name<input type="text" name="service_name" required></label>
+        <label>Beneficiary Name<input type="text" name="beneficiary_name" required></label>
+        <label>Rating<input type="number" name="rating" min="1" max="5" value="5"></label>
+        <label>Status<select name="status"><option>Open</option><option selected>Resolved</option><option>Escalated</option></select></label>
+        <label>Comment<textarea name="comment"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Feedback</button>
+</form>
+{% endblock %}

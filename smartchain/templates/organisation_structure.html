@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Organisation Structure{% endblock %}
+{% block content %}
+<h2>Organisation Structure</h2>
+<div class="panel">
+    {% for department in departments %}
+        <h3>{{ department.name }} ({{ department.code }})</h3>
+        <ul>
+            {% for directorate in department.directorates %}
+                <li><strong>{{ directorate.name }}</strong>
+                    <ul>
+                        {% for unit in directorate.units %}
+                            <li>{{ unit.name }} ({{ unit.code }})</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</div>
+{% endblock %}

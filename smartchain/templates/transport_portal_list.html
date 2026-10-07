@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Directorate Transport Cases{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">Directorate Transport Portal</span><h1>Directorate transport cases</h1><p>Track the cases submitted by this authorised directorate scope and their Central Transport SCM lifecycle.</p></div><a class="primary-btn" href="{{ url_for('transport_portal.request_transport') }}">＋ New case</a></div>
+{% if items %}<div class="table-wrap"><table class="data-table"><thead><tr><th>Reference</th><th>Date</th><th>Route</th><th>Purpose</th><th>Status</th><th>Current owner</th></tr></thead><tbody>{% for item in items %}<tr><td>TR-{{ item.created_at.strftime('%Y') }}-{{ '%06d'|format(item.id) }}</td><td>{{ item.travel_date }}</td><td>{{ item.pickup_location }} → {{ item.destination }}</td><td>{{ item.purpose }}</td><td><span class="status-badge status-open">{{ item.status }}</span></td><td>{{ item.transport_assignment.official.full_name if item.transport_assignment and item.transport_assignment.official else 'Central SCM intake' }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><h3>No directorate cases yet</h3><p>Submit an official case to begin tracking it.</p><a class="primary-btn" href="{{ url_for('transport_portal.request_transport') }}">Create case</a></div>{% endif %}
+{% endblock %}

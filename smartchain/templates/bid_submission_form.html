@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}Record Bid Submission{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">{{ tender.tender_number }} · {{ bidder.legal_name }}</span><h1>Record bid document</h1><p>Track the submission without storing critical workflow data only in the browser.</p></div></div>
+<form method="post" enctype="multipart/form-data" class="form-card"><div class="form-grid"><label>Document category<select name="document_category"><option>Bid Submission</option><option>Pricing Document</option><option>Technical Document</option><option>Declaration</option><option>Certificate</option><option>Supporting Evidence</option></select></label><label>Document title<input type="text" name="document_title" required></label><label>Upload document<input type="file" name="document_file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv"></label><label>Document reference<input type="text" name="document_reference" placeholder="Repository path or reference"></label><label>Status<select name="status"><option>Received</option><option>Verified</option><option>Rejected</option><option>Superseded</option></select></label></div><button class="primary-btn" type="submit">Save submission record</button></form>
+{% endblock %}

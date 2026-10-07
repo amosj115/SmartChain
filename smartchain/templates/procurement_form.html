@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Procurement{% endblock %}
+{% block content %}
+<h2>Create Procurement Request</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Procurement Method<input type="text" name="procurement_method" value="RFQ"></label>
+        <label>Estimated Value<input type="number" step="0.01" name="estimated_value"></label>
+        <label>Status<select name="status"><option>Draft</option><option>Approved</option><option>In Progress</option></select></label>
+        <label>Recommendation<textarea name="recommendation"></textarea></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Procurement</button>
+</form>
+{% endblock %}

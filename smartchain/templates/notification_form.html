@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Create Notification{% endblock %}
+{% block content %}
+<h2>Create Notification</h2>
+<form method="post" class="form-card">
+    <div class="form-grid">
+        <label>Title<input type="text" name="title" required></label>
+        <label>Message<textarea name="message" required></textarea></label>
+        <label>Read<select name="is_read"><option value="false">Unread</option><option value="true">Read</option></select></label>
+    </div>
+    <button type="submit" class="primary-btn">Save Notification</button>
+</form>
+{% endblock %}

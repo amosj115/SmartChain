@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Evaluator Score Sheet{% endblock %}
+{% block content %}
+<div class="page-header"><div><span class="eyebrow">{{ tender.tender_number }} · Evaluator workspace</span><h1>Score bidder</h1><p>Your score sheet is stored separately from other evaluators.</p></div></div>
+<form method="post" class="form-card"><div class="form-grid"><label>Bidder<select name="bidder_id" required><option value="">Select bidder</option>{% for bidder in bidders %}<option value="{{ bidder.id }}">{{ bidder.legal_name }}</option>{% endfor %}</select></label><label>Criterion<select id="criterion-select" name="criterion_id" required><option value="">Select criterion</option>{% for criterion in criteria %}<option value="{{ criterion.id }}" data-pass-fail="{{ 'true' if criterion.pass_fail or criterion.scoring_framework|lower == 'pass/fail' else 'false' }}">{{ criterion.name }} ({{ criterion.scoring_framework }})</option>{% endfor %}</select></label></div>
+{% for criterion in criteria %}{% if criterion.subcriteria %}<fieldset class="form-card criterion-score-group" data-criterion="{{ criterion.id }}" hidden><legend>{{ criterion.name }} · Maximum {{ criterion.max_score }}</legend>{% for subcriterion in criterion.subcriteria %}<div class="form-grid"><label>{{ subcriterion.name }} · max {{ subcriterion.max_points }}<input type="number" name="subcriterion_{{ subcriterion.id }}" step="0.01" min="0" max="{{ subcriterion.max_points }}"></label><label>Comment<textarea name="subcriterion_comment_{{ subcriterion.id }}"></textarea></label><label>Evidence reference<input name="subcriterion_evidence_{{ subcriterion.id }}"></label></div>{% endfor %}</fieldset>{% endif %}{% endfor %}
+<label id="single-score-field">Criterion score<input id="score-input" type="number" name="score" step="0.01" min="0"></label><label id="pass-fail-field" hidden>Pass/fail result<select name="pass_fail_score"><option value="">Select result</option><option>Pass</option><option>Fail</option></select></label><label>Evaluator comments<textarea name="comments"></textarea></label><div class="workspace-actions"><button class="secondary-btn" name="action" value="draft" type="submit">Save draft</button><button class="primary-btn" name="action" value="submit" type="submit">Submit evaluation</button></div></form>
+<script>
+const criterionSelect = document.getElementById('criterion-select');
+const scoreGroups = document.querySelectorAll('.criterion-score-group');
+const scoreField = document.getElementById('single-score-field');
+const scoreInput = document.getElementById('score-input');
+const passFailField = document.getElementById('pass-fail-field');
+function updateCriterionFields() {
+	const selected = criterionSelect.value;
+	const hasSubcriteria = [...scoreGroups].some(group => group.dataset.criterion === selected);
+	const selectedOption = criterionSelect.options[criterionSelect.selectedIndex];
+	const isPassFail = selectedOption && selectedOption.dataset.passFail === 'true';
+	scoreGroups.forEach(group => { group.hidden = group.dataset.criterion !== selected; });
+	scoreField.hidden = hasSubcriteria || isPassFail;
+	scoreInput.required = !hasSubcriteria && !isPassFail;
+	passFailField.hidden = hasSubcriteria || !isPassFail;
+}
+criterionSelect.addEventListener('change', updateCriterionFields);
+updateCriterionFields();
+</script>
+{% endblock %}
